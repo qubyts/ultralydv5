@@ -38,8 +38,10 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- C:/Users/metap/Downloads/nemethricsi07-attachments/ultralydv4/ultralydv4/Core/application/DefTask.h \
- C:/Users/metap/Downloads/nemethricsi07-attachments/ultralydv4/ultralydv4/Core/application/BuzzerTask.h
+ C:/Users/metap/git/repository4/ultralydv4/Core/application/DefTask.h \
+ C:/Users/metap/git/repository4/ultralydv4/Core/application/BuzzerTask.h \
+ ../Core/Inc/print_server.h \
+ C:/Users/metap/git/repository4/ultralydv4/Core/application/Myapp.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -80,5 +82,7 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
-C:/Users/metap/Downloads/nemethricsi07-attachments/ultralydv4/ultralydv4/Core/application/DefTask.h:
-C:/Users/metap/Downloads/nemethricsi07-attachments/ultralydv4/ultralydv4/Core/application/BuzzerTask.h:
+C:/Users/metap/git/repository4/ultralydv4/Core/application/DefTask.h:
+C:/Users/metap/git/repository4/ultralydv4/Core/application/BuzzerTask.h:
+../Core/Inc/print_server.h:
+C:/Users/metap/git/repository4/ultralydv4/Core/application/Myapp.h:

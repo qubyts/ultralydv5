@@ -1,5 +1,4 @@
 #include "BuzzerTask.h"
-
 #include "main.h"
 #include "stm32f4xx_hal_conf.h"
 #include "Myapp.h"
@@ -8,6 +7,7 @@
 #include "main.h"
 #include "stdio.h"
 #include "tim.h"
+#include "print_server.h"
 #include "usart.h"
 
 
@@ -39,10 +39,10 @@ void Start_BuzzerTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  distance = *((int *) argument) + constant ; //0.034cm->0.000001s
+	  distance = (captured_value1); //0.034cm->0.000001s
 
-	  distance = (distance/6.15)*0.0342 + constant;
-
+	  distance = (distance/6.15)*0.0342+constant;
+	  printf("CCR1-2 is %i \n", captured_value1);
 	  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 	  if((distance > 0)&&(distance <30))
 		  {
@@ -90,9 +90,9 @@ void Start_BuzzerTask(void *argument)
 			  buzzer_toggle_delay = 1000;
 			  buzzer_toggle_cont = 0;
 	  	  }
-
-	  sprintf(txbuff1,"distance: %d\n\r",distance);
-	  HAL_UART_Transmit(&huart2, &txbuff1, 20, 100);
+	  printf("distance is: %i cm \n \r", argument);
+	  //sprintf(txbuff1,"distance: %d\n\r",distance);
+	  //HAL_UART_Transmit(&huart2, &txbuff1, 20, 100);
 	  if(buzzer_toggle == 1)
 	  {
 		  HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_1);
@@ -113,8 +113,6 @@ void Start_BuzzerTask(void *argument)
 	  {
 		  buzzer_toggle_delay = 2000;
 		  HAL_TIM_PWM_Stop(&htim5, TIM_CHANNEL_1);
-
-
 	  }
 	  if(distance >300)
 	  {
@@ -130,23 +128,3 @@ void buzzer_init(){
 /* creation of Buzzer_Task */
 Buzzer_TaskHandle = osThreadNew(Start_BuzzerTask, &captured_value1, &Buzzer_Task_attributes);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

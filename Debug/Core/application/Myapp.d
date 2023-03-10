@@ -36,7 +36,8 @@ Core/application/Myapp.o: ../Core/application/Myapp.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- ../Core/application/BuzzerTask.h ../Core/application/DefTask.h
+ ../Core/application/BuzzerTask.h ../Core/application/DefTask.h \
+ ../Core/Inc/print_server.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -78,3 +79,4 @@ Core/application/Myapp.o: ../Core/application/Myapp.c ../Core/Inc/main.h \
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
 ../Core/application/BuzzerTask.h:
 ../Core/application/DefTask.h:
+../Core/Inc/print_server.h:

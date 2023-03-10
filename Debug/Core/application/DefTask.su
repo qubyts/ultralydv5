@@ -1,2 +1,2 @@
-../Core/application/DefTask.c:22:6:StarttimerTask	16	static
-../Core/application/DefTask.c:50:6:deftask_init	8	static
+../Core/application/DefTask.c:21:6:StartDefaultTask	16	static
+../Core/application/DefTask.c:47:6:deftask_init	8	static

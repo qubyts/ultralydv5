@@ -54,6 +54,7 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 extern int captured_value1;
+extern int hardwareDelayFlag;
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

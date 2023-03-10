@@ -1,4 +1,3 @@
-
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -20,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include "BuzzerTask.h"
 #include "DefTask.h"
+#include "print_server.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,7 +48,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-int captured_value1 = 10;
+int captured_value1 = 0;
+int hardwareDelayFlag = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -90,12 +92,12 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USART2_UART_Init();
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_TIM4_Init();
   MX_TIM5_Init();
-  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -177,22 +179,44 @@ void SystemClock_Config(void)
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim->Instance == TIM4) {
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
-		HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-		HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1);
+		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_6);
+		if (TIM4->CCR1 >= 5000){
+		captured_value1 = TIM4->CCR1;
+		printf("CCR1 is %i \n", captured_value1);
+		}
+
 	}
 }
+
+
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim->Instance == TIM2) {
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
-		HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-		HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1);
-		captured_value1 = TIM4->CCR1;
-		TIM4->CNT = 0;
-		TIM1->CNT = 0;
+//		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
+		if(hardwareDelayFlag == 1)
+		{
+//			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
+			HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+			HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1);
+			TIM1->CNT = 0;
+			TIM2->ARR = 54000;
+			__HAL_TIM_ENABLE(&htim2);
+			HAL_TIM_IC_Stop_IT(&htim4, TIM_CHANNEL_1);
+						hardwareDelayFlag = 0;
+		}		else
+		{
+					//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
+			//	__HAL_TIM_ENABLE(&htim4);
+//					TIM4->CCR1;
+				TIM4->CNT = 0;
+					//TIM4->DIER
+		}
+
 	}
 }
+
+
 /* USER CODE END 4 */
 
 /**
