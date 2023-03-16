@@ -53,8 +53,8 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-extern int captured_value1;
-extern int hardwareDelayFlag;
+extern volatile int captured_value1;
+extern volatile int hardwareDelayFlag;
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

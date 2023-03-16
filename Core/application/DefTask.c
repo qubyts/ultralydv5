@@ -31,6 +31,7 @@ if (hardwareDelayFlag == 0){
 	  		__HAL_TIM_ENABLE(&htim2);
 	  		TIM1->CCR1 = 2250;
 	  		HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_1);
+	  		__HAL_TIM_ENABLE(&htim4);
 			HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
 			HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 //			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);

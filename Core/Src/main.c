@@ -48,8 +48,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-int captured_value1 = 0;
-int hardwareDelayFlag = 0;
+volatile int captured_value1 = 0;
+volatile int hardwareDelayFlag = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -179,10 +179,11 @@ void SystemClock_Config(void)
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim->Instance == TIM4) {
-		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_6);
+		//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_6);
+		printf("CCR1 is %i \n", TIM4->CCR1);
 		if (TIM4->CCR1 >= 5000){
-		captured_value1 = TIM4->CCR1;
-		printf("CCR1 is %i \n", captured_value1);
+			captured_value1 = TIM4->CCR1;
+
 		}
 
 	}
@@ -201,7 +202,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1);
 			TIM1->CNT = 0;
 			TIM2->ARR = 54000;
-			__HAL_TIM_ENABLE(&htim2);
+			//__HAL_TIM_ENABLE(&htim2);
 			HAL_TIM_IC_Stop_IT(&htim4, TIM_CHANNEL_1);
 						hardwareDelayFlag = 0;
 		}		else
